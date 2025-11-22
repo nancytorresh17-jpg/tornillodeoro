@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>El Tornillo de Oro — Ferretería</title>
+<meta name="description" content="El Tornillo de Oro — Tornillería y soluciones para profesionales y particulares. Mayoreo y entrega local." />
+<style>
+  :root{
+    --gold: #FFC20E;
+    --gold-dark:#D1A400;
+    --steel:#6B7280;
+    --bg:#fbfbfb;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --glass: rgba(255,255,255,0.7);
+    --radius:14px;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:linear-gradient(180deg,#fff,#fbfbfb);
+    color:#111; -webkit-font-smoothing:antialiased;
+  }
+  /* container */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:18px;}
+  header{position:sticky;top:0;z-index:60;background:var(--glass);backdrop-filter:blur(6px);border-bottom:1px solid #e6e6e6;}
+  .hdr{display:flex;align-items:center;justify-content:space-between;height:76px;gap:18px;max-width:var(--maxw);margin:0 auto;padding:10px 18px;}
+  .brand{display:flex;gap:12px;align-items:center}
+  .brand h1{font-size:18px;margin:0;font-weight:700}
+  .brand p{margin:0;font-size:12px;color:var(--muted)}
+  .logoCircle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(16,24,40,0.06);background:linear-gradient(180deg,#FFD24D,#FFB600)}
+  nav a{margin:0 8px;color:#111;text-decoration:none;font-weight:600;font-size:14px}
+  .search{display:flex;align-items:center;gap:8px;border-radius:10px;padding:6px 10px;border:1px solid #e6e6e6;background:white;box-shadow:0 2px 6px rgba(16,24,40,0.03)}
+  .search input{border:0;outline:none;font-size:14px;width:220px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-weight:600;border:0;cursor:pointer}
+  .btn-primary{background:#111;color:white;box-shadow:0 6px 20px rgba(17,17,17,0.12)}
+  .btn-gold{background:var(--gold);color:#111}
+  .btn-outline{background:transparent;border:1px solid var(--gold);color:#111}
+  .cartBtn{position:relative;padding:6px;border-radius:10px}
+  .badge{position:absolute;top:-6px;right:-6px;background:#e11d48;color:white;font-size:11px;border-radius:8px;padding:2px 6px}
+
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:center;padding:48px 18px}
+  .hero h2{font-size:38px;margin:0;line-height:1.02}
+  .hero p{color:var(--muted);margin-top:12px;font-size:16px}
+  .hero .cta{margin-top:18px;display:flex;gap:12px}
+  .stats{display:flex;gap:12px;margin-top:22px}
+  .stat{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(16,24,40,0.03);min-width:110px}
+  .stat .v{font-weight:800;font-size:18px}
+  /* Screw card */
+  .heroCard{border-radius:20px;padding:22px;background:linear-gradient(180deg,#fff,#fafafa);box-shadow:0 30px 60px rgba(15,23,42,0.06);display:flex;flex-direction:column;align-items:center}
+  /* rotating screw */
+  .screwWrap{width:240px;height:240px;display:flex;align-items:center;justify-content:center}
+  @keyframes rot{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .rot{animation:rot 20s linear infinite}
+
+  /* curve svg */
+  .curve{width:100%;height:36px;display:block}
+
+  /* products */
+  .section{padding:40px 18px}
+  .section h3{margin:0;font-size:22px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+  .grid{display:grid;grid-template-columns:repeat(1,1fr);gap:18px;margin-top:18px}
+  @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}
+  .card{background:var(--card);border-radius:12px;padding:14px;border:1px solid #eee;box-shadow:0 8px 24px rgba(16,24,40,0.04)}
+  .card .cat{font-size:12px;color:var(--muted)}
+  .card h4{margin:6px 0 10px;font-size:16px}
+  .price{font-weight:800}
+  .card .actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+  .card .actions button{width:110px;border-radius:10px;padding:8px 10px;border:0;cursor:pointer}
+  .addBtn{background:#111;color:white}
+  .infoBtn{background:transparent;border:1px solid #ddd}
+
+  /* services */
+  .cardsRow{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:900px){.cardsRow{grid-template-columns:repeat(3,1fr)}}
+  .service{background:#fff;border-radius:12px;padding:18px;border:1px solid #eee}
+
+  /* wholesale CTA */
+  .wholesale{background:linear-gradient(90deg,#fff,#f7f7f7);border-radius:16px;padding:18px;border:1px solid #eee;display:flex;align-items:center;justify-content:space-between;gap:12px}
+
+  /* misc sections */
+  .threecol{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:900px){.threecol{grid-template-columns:repeat(3,1fr)}}
+
+  /* faq */
+  .faqGrid{display:grid;grid-template-columns:1fr;gap:10px}
+  @media(min-width:800px){.faqGrid{grid-template-columns:repeat(2,1fr)}}
+  .faqItem{border-radius:10px;padding:14px;border:1px solid #eee}
+
+  /* footer */
+  footer{background:linear-gradient(90deg,#1f2937,#111827);color:#ddd;padding:28px;border-top:1px solid rgba(255,255,255,0.04)}
+
+  /* floating chat */
+  .chatCTA{position:fixed;right:20px;bottom:20px;z-index:80}
+  .chatBtn{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:#111;color:white;box-shadow:0 10px 30px rgba(17,17,17,0.24);cursor:pointer}
+
+  /* cart floating */
+  .cartFloat{position:fixed;left:20px;bottom:20px;background:white;padding:10px;border-radius:10px;box-shadow:0 10px 30px rgba(16,24,40,0.08)}
+
+  /* modal */
+  .modalBack{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:120}
+  .modalCard{width:min(820px,96%);background:white;border-radius:14px;padding:18px;box-shadow:0 30px 80px rgba(16,24,40,0.3)}
+  .modalGrid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:740px){.modalGrid{grid-template-columns:1fr 1fr}}
+  .closeBtn{position:absolute;right:18px;top:18px;background:transparent;border:0;font-size:18px;cursor:pointer}
+  input,textarea,select{width:100%;padding:10px;border:1px solid #e6e6e6;border-radius:10px;font-size:14px}
+
+  /* small */
+  .muted{color:var(--muted)}
+  .mt-2{margin-top:8px}
+  .mt-3{margin-top:12px}
+  .mb-2{margin-bottom:8px}
+  .center{text-align:center}
+  a{color:inherit}
+  /* responsive tweaks */
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr; padding:26px 12px}
+    .hdr{padding:8px}
+    nav{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <div class="brand">
+      <div class="logoCircle" aria-hidden>
+        <!-- logo svg -->
+        <svg viewBox="0 0 80 80" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lg1" x1="0" x2="1"><stop offset="0" stop-color="#FFD24D"/><stop offset="1" stop-color="#FFB600"/></linearGradient>
+          </defs>
+          <circle cx="40" cy="40" r="36" fill="url(#lg1)"/>
+          <g transform="translate(12,12)">
+            <path d="M20 0 L30 0 L30 22 L20 22 Z" fill="#6B7280" transform="rotate(30 25 11)" />
+            <rect x="18" y="12" width="14" height="4" rx="2" fill="#6B7280" />
+          </g>
+        </svg>
+      </div>
+      <div>
+        <h1>El Tornillo de Oro</h1>
+        <p class="muted">Si no lo tenemos, no existe. Y si no existe, te lo conseguimos.</p>
+      </div>
+    </div>
+
+    <nav aria-label="principal">
+      <a href="#productos">Productos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#cotizaciones">Mayoreo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="search" role="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" style="opacity:.7"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <input id="searchInput" placeholder="Buscar tornillos, taladros, pintura..." />
+      </div>
+
+      <button class="btn btn-outline" id="openWholesale">Cotización Mayoreo</button>
+      <button class="cartBtn" id="openCart" title="Ver carrito">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 6h15l-1.5 9h-11z" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1" fill="#111"/><circle cx="18" cy="20" r="1" fill="#111"/></svg>
+        <span class="badge" id="cartCount" style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero wrap" aria-labelledby="heroTitle">
+    <div>
+      <h2 id="heroTitle">Soluciones de ferretería pensadas para profesionales y casas.</h2>
+      <p>Desde tornillos milimétricos hasta maquinaria profesional — 40 años de experiencia, inventario infinito y asesoría experta en Torreón.</p>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#productos">Ver catálogo</a>
+        <button class="btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Contáctanos</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="muted">Años en el mercado</div><div class="v">40+</div></div>
+        <div class="stat"><div class="muted">Marcas certificadas</div><div class="v">+120</div></div>
+        <div class="stat"><div class="muted">Entrega local</div><div class="v">15 km</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="heroCard">
+        <div class="screwWrap">
+          <!-- rotating screw SVG -->
+          <svg class="rot" viewBox="0 0 200 200" width="220" height="220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tornillo dorado">
+            <defs>
+              <linearGradient id="goldG" x1="0" x2="1"><stop offset="0" stop-color="#FFD24D"/><stop offset="1" stop-color="#FFB600"/></linearGradient>
+              <filter id="shine" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <g transform="translate(100,100)">
+              <ellipse rx="46" ry="46" fill="url(#goldG)" filter="url(#shine)" opacity="0.95" />
+              <rect x="-8" y="-70" width="16" height="140" rx="6" fill="#D1A400" />
+              <g transform="translate(0, -22)" fill="#B88700">
+                <path d="M-28 -6 L28 -6 L28 6 L-28 6 Z" />
+                <path d="M-28 -12 C -12 -6, 12 -6, 28 -12" stroke="#D6A200" stroke-width="3" fill="none" />
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="mt-2 center">
+          <div class="muted">Especialistas en fijación y soluciones</div>
+          <div style="font-weight:700;margin-top:6px">Piezas difíciles de conseguir, encontradas.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- decorative curve -->
+  <svg class="curve" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,40 C200,120 400,0 720,40 C1040,80 1240,0 1440,40 L1440 60 L0 60 Z" fill="#fff"/></svg>
+
+  <!-- Productos -->
+  <section id="productos" class="section wrap" aria-labelledby="prodTitle">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <h3 id="prodTitle">Catálogo destacado</h3>
+        <p class="muted">Productos seleccionados y los favoritos de Chuy en el mostrador.</p>
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center">
+        <select id="sort" style="padding:9px;border-radius:10px;border:1px solid #e6e6e6">
+          <option value="rel">Relevancia</option>
+          <option value="plh">Precio: bajo a alto</option>
+          <option value="phl">Precio: alto a bajo</option>
+        </select>
+        <button class="btn" id="clearSearch">Limpiar</button>
+      </div>
+    </div>
+
+    <div class="grid" id="productGrid" aria-live="polite">
+      <!-- product cards inserted by JS -->
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="section" style="background:#fbfbfb">
+    <div class="wrap">
+      <h3>Servicios que hacen la diferencia</h3>
+      <div class="cardsRow mt-3">
+        <div class="service"><h4>Entrega a Domicilio</h4><div class="muted mt-2">Zona 15 km — gratis desde $5,000</div><p class="mt-2">Llevamos material pesado con unidades de carga. Agenda por teléfono o en línea.</p></div>
+        <div class="service"><h4>Igualación de Pintura</h4><div class="muted mt-2">Sistema Comex</div><p class="mt-2">Igualamos tu muestra con nuestro sistema computarizado. Gratis con compra de 1 galón+.</p></div>
+        <div class="service"><h4>Renta de Herramienta</h4><div class="muted mt-2">Por día — depósito 30%</div><p class="mt-2">Rotomartillo, compactadora y más. Requisitos: INE y depósito.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mayoreo -->
+  <section id="cotizaciones" class="section wrap">
+    <div class="wholesale">
+      <div>
+        <h4>¿Eres contratista o compras al mayoreo?</h4>
+        <p class="muted">Solicita una cotización especializada: precios y condiciones para cuentas de mayoreo.</p>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-gold" id="reqWholesale">Solicitar cotización</button>
+        <a class="btn" href="#" onclick="alert('Requisitos: RFC, comprobante de domicilio y pedido mínimo según línea.');return false">Requisitos para mayoreo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Policies, Hours and Contact -->
+  <section class="section wrap">
+    <div class="threecol">
+      <div>
+        <h5>Horario</h5>
+        <p>Lunes - Viernes: 8:00 AM - 7:00 PM<br>Sábado: 9:00 AM - 3:00 PM<br>Domingo: Cerrado</p>
+        <h5 class="mt-3">Dirección</h5>
+        <p>Av. de los Insurgentes #45, Col. Centro, Torreón, Coahuila</p>
+        <h5 class="mt-3">Teléfonos</h5>
+        <p>Mostrador: 871-123-4567<br>Ventas Mayoreo: 871-123-4568</p>
+      </div>
+
+      <div>
+        <h5>Política de Devoluciones</h5>
+        <p>15 días naturales. Requiere ticket y embalaje original. No aplica a pintura igualada ni material a granel.</p>
+        <h5 class="mt-3">Métodos de pago</h5>
+        <p>Efectivo, Visa, MasterCard y SPEI (transferencia). No aceptamos AMEX.</p>
+      </div>
+
+      <div id="contacto">
+        <h5>Contacto</h5>
+        <p>ventas@eltornillodeoro.com<br>soporte@eltornillodeoro.com</p>
+        <h5 class="mt-3">Síguenos</h5>
+        <p>Facebook: /ElTornilloDeOroTRC • Instagram: @tornillodeoro</p>
+        <h5 class="mt-3">Asistente</h5>
+        <p>"Pancho" - Chat en vivo para consultas rápidas (no da consejos técnicos de instalación).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section wrap" aria-labelledby="faqTitle">
+    <h3 id="faqTitle">Preguntas frecuentes</h3>
+    <div class="faqGrid mt-3">
+      <div class="faqItem"><strong>¿Abren los domingos?</strong><div class="mt-2 muted">No, cerramos los domingos.</div></div>
+      <div class="faqItem"><strong>¿Puedo facturar una compra anterior?</strong><div class="mt-2 muted">No. La facturación debe solicitarse al momento de la compra en caja.</div></div>
+      <div class="faqItem"><strong>¿Aceptan AMEX?</strong><div class="mt-2 muted">No, sólo Visa y MasterCard, efectivo y transferencia.</div></div>
+      <div class="faqItem"><strong>¿Me pueden fiar material?</strong><div class="mt-2 muted">No al público general; líneas de crédito pre-aprobadas para contratistas mayoreo.</div></div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <footer>
+    <div class="wrap" style="display:flex;gap:20px;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div class="logoCircle" style="width:44px;height:44px;margin-bottom:8px"></div>
+        <div style="max-width:320px">El Tornillo de Oro — Ferretería con inventario infinito, asesoría experta y entrega local.</div>
+      </div>
+      <div>
+        <h6 style="color:#fff">Visítanos</h6>
+        <div class="muted" style="margin-top:6px">Av. de los Insurgentes #45, Col. Centro, Torreón</div>
+      </div>
+      <div>
+        <h6 style="color:#fff">Horario</h6>
+        <div class="muted" style="margin-top:6px">Lun - Vie 8:00 - 19:00 • Sáb 9:00 - 15:00</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.06);text-align:center;padding:12px;color:#bfc7cc;margin-top:18px">© <span id="year"></span> Ferretería "El Tornillo de Oro" S.A. de C.V. — Todos los derechos reservados.</div>
+  </footer>
+
+</main>
+
+<!-- floating chat and cart -->
+<div class="chatCTA">
+  <button class="chatBtn" onclick="alert('Inicia chat con Pancho (integrar proveedor de chat)')">
+    <span style="width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#FBDD4D,#FFB600);font-weight:700">P</span>
+    <div style="text-align:left"><div style="font-weight:700;font-size:14px">Pancho</div><div style="font-size:12px;color:#c7c7c7">Asistente de la ferretería</div></div>
+  </button>
+</div>
+
+<div class="cartFloat" id="cartFloat" style="display:none">Total: <span id="cartTotal">0.00</span> MXN</div>
+
+<!-- modals -->
+<div id="modalRoot" aria-live="polite"></div>
+
+<script>
+  // Data (same as prototype)
+  const products = [
+    { id:1, name:"Tornillo máquina 3/8", price:5.5, unit:"pieza", category:"Tornillería" },
+    { id:2, name:"Pija para madera (caja 100)", price:85, unit:"caja", category:"Tornillería" },
+    { id:3, name:"Taladro Rotomartillo (Bosch)", price:1900, unit:"pieza", category:"Herramientas Eléctricas" },
+    { id:4, name:"Tinaco 1100L (Rotoplas)", price:2400, unit:"pieza", category:"Plomería" },
+    { id:5, name:"Pala cuadrada (Truper)", price:280, unit:"pieza", category:"Herramientas Manuales" }
+  ];
+
+  // state
+  let cart = [];
+
+  // DOM refs
+  const grid = document.getElementById('productGrid');
+  const searchInput = document.getElementById('searchInput');
+  const cartCount = document.getElementById('cartCount');
+  const cartTotal = document.getElementById('cartTotal');
+  const cartFloat = document.getElementById('cartFloat');
+  const modalRoot = document.getElementById('modalRoot');
+
+  // helpers
+  function formatMX(n){ return Number(n).toFixed(2); }
+  function renderProducts(list){
+    grid.innerHTML = '';
+    list.forEach(p=>{
+      const el = document.createElement('article');
+      el.className='card';
+      el.innerHTML = `
+        <div class="cat muted">${p.category}</div>
+        <h4>${p.name}</h4>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+          <div><div class="muted">Precio</div><div class="price">${formatMX(p.price)} MXN / ${p.unit}</div></div>
+          <div class="actions">
+            <button class="addBtn" data-id="${p.id}">Agregar</button>
+            <button class="infoBtn" data-id="${p.id}">Detalles</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(el);
+    });
+  }
+
+  function openProductModal(id){
+    const p = products.find(x=>x.id==id);
+    modalRoot.innerHTML = `
+      <div class="modalBack" id="modalBack">
+        <div class="modalCard" role="dialog" aria-modal="true">
+          <button class="closeBtn" id="closeModal">✕</button>
+          <div class="modalGrid">
+            <div style="background:#f8f8f8;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:18px">Imagen / SVG</div>
+            <div>
+              <h3 style="margin:0">${p.name}</h3>
+              <div class="muted mt-2">Categoría: ${p.category}</div>
+              <div style="font-weight:800;font-size:22px;margin-top:12px">${formatMX(p.price)} MXN</div>
+              <div style="margin-top:16px;display:flex;gap:10px">
+                <button class="btn" id="modalAdd" style="background:var(--gold);font-weight:700">${'Agregar al carrito'}</button>
+                <button class="btn" id="modalClose">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.getElementById('closeModal').onclick = closeModal;
+    document.getElementById('modalClose').onclick = closeModal;
+    document.getElementById('modalAdd').onclick = ()=>{
+      addToCart(p.id);
+      closeModal();
+    };
+    document.getElementById('modalBack').onclick = (e)=>{ if(e.target.id==='modalBack') closeModal(); };
+  }
+
+  function closeModal(){ modalRoot.innerHTML=''; }
+
+  // cart
+  function addToCart(id){
+    const item = products.find(x=>x.id==id);
+    const found = cart.find(c=>c.id==id);
+    if(found) found.qty++;
+    else cart.push({...item, qty:1});
+    updateCartUI();
+  }
+  function updateCartUI(){
+    const total = cart.reduce((s,i)=>s + i.price * i.qty,0);
+    const count = cart.reduce((s,i)=>s + i.qty,0);
+    if(count>0){ cartCount.style.display='inline-block'; cartCount.textContent=count; cartFloat.style.display='block'; }
+    else { cartCount.style.display='none'; cartFloat.style.display='none'; }
+    cartTotal.textContent = formatMX(total);
+  }
+
+  // search & sort
+  function applyFilters(){
+    const q = searchInput.value.trim().toLowerCase();
+    const sort = document.getElementById('sort').value;
+    let res = products.filter(p => (p.name + ' ' + p.category).toLowerCase().includes(q));
+    if(sort==='plh') res = res.sort((a,b)=>a.price-b.price);
+    if(sort==='phl') res = res.sort((a,b)=>b.price-a.price);
+    renderProducts(res);
+  }
+
+  // event delegation for product actions
+  grid.addEventListener('click', (e)=>{
+    const add = e.target.closest('.addBtn');
+    const info = e.target.closest('.infoBtn');
+    if(add){ addToCart(Number(add.dataset.id)); updateCartUI(); return; }
+    if(info){ openProductModal(Number(info.dataset.id)); return; }
+  });
+
+  // wire search/sort
+  searchInput.addEventListener('input', ()=> applyFilters());
+  document.getElementById('sort').addEventListener('change', applyFilters);
+  document.getElementById('clearSearch').addEventListener('click', ()=>{
+    searchInput.value=''; applyFilters();
+  });
+
+  // wholesale modal
+  function openWholesaleModal(){
+    modalRoot.innerHTML = `
+      <div class="modalBack" id="modalBack2">
+        <div class="modalCard" role="dialog" aria-modal="true">
+          <button class="closeBtn" id="closeWholesale">✕</button>
+          <h3>Solicitud de Cotización - Mayoreo</h3>
+          <p class="muted">Complete los datos; enviaremos su solicitud a ventas@eltornillodeoro.com</p>
+          <form id="whForm" style="margin-top:12px;display:grid;gap:8px">
+            <input name="name" required placeholder="Nombre completo"/>
+            <input name="company" required placeholder="Nombre de la constructora o negocio"/>
+            <input name="email" type="email" required placeholder="Correo electrónico"/>
+            <input name="phone" required placeholder="Teléfono"/>
+            <textarea name="items" required placeholder="Lista de materiales y cantidades (detalle lo más posible)" rows="4"></textarea>
+            <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:6px">
+              <button type="button" class="btn" id="cancelWh">Cancelar</button>
+              <button type="submit" class="btn btn-gold">Enviar solicitud</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    `;
+    document.getElementById('closeWholesale').onclick = closeModal;
+    document.getElementById('cancelWh').onclick = closeModal;
+    document.getElementById('whForm').onsubmit = function(e){
+      e.preventDefault();
+      const f = new FormData(e.target);
+      // NOTE: integrate backend to actually send email; here we show confirmation
+      alert('Solicitud enviada a ventas@eltornillodeoro.com. Un vendedor se pondrá en contacto a ' + f.get('email'));
+      closeModal();
+    };
+    document.getElementById('modalBack2').onclick = (ev)=>{ if(ev.target.id==='modalBack2') closeModal(); };
+  }
+
+  // wire wholesale buttons
+  document.getElementById('openWholesale').addEventListener('click', openWholesaleModal);
+  document.getElementById('reqWholesale').addEventListener('click', openWholesaleModal);
+
+  // cart open -> show quick summary modal
+  document.getElementById('openCart').addEventListener('click', ()=>{
+    if(cart.length===0){ alert('Tu carrito está vacío.'); return; }
+    let rows = cart.map(it=>`${it.name} — ${it.qty} x ${formatMX(it.price)} = ${formatMX(it.qty*it.price)} MXN`).join('\\n');
+    rows += '\\n\\nTotal: ' + formatMX(cart.reduce((s,i)=>s+i.qty*i.price,0)) + ' MXN';
+    alert(rows);
+  });
+
+  // initial render
+  renderProducts(products);
+  applyFilters();
+  updateCartUI();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // small accessibility: keyboard Enter on search triggers filter
+  searchInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); applyFilters(); } });
+
+  // allow opening product modal by clicking info button (delegated handled above)
+  // allow closing modal with Escape
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+  // simple analytics: log interactions (placeholder for real analytics)
+  function log(evt,data){ console.log('[ETDO]',evt,data||''); }
+  ['click','input'].forEach(t=>document.addEventListener(t,(e)=>{/*noop for now*/}));
+</script>
+
+</body>
+</html>
